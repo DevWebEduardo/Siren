@@ -81,6 +81,15 @@
                             @endforeach  
                         </select>
                     </div>
+                    <div class="w-full sm:w-4/12 md:w-3/12 lg:w-full mx-2 pr-4 md:pr-0 lg:mx-0">
+                        <p class="w-full text-lg md:text-xl pb-2 pt-6 md:pb-4 md:pt-8">{{ __("Order by") }}</p>
+                        <select name="" class="w-full text-lg md:text-xl p-2 bg-blue-400 text-center">
+                            <option value="newest">{{ __("Newest") }}</option>
+                            <option value="oldest">{{ __("Oldest") }}</option>
+                            <option value="lowest_price">{{ __("Lowest price") }}</option>
+                            <option value="highest_price">{{ __("Highest price") }}</option>
+                        </select>
+                    </div>
                     <div class="w-full flex justify-center items-center lg:block lg:w-auto mb-7 md:mb-6 lg:mb-2 mt-5 ">
                         <button class="bg-green-600 text-white font-medium text-center px-10 md:px-14 py-1 md:py-2 text-lg md:text-xl rounded hover:bg-green-500 hover:bg-green-500 hover:text-black duration-700">Search</button>
                     </div>

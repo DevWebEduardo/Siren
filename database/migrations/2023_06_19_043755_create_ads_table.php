@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user');
+            $table->string('slug');
             $table->string('title');
             $table->text('description');
             $table->string('site');

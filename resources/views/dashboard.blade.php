@@ -7,6 +7,20 @@
             {{ __('Hello') }} {{ Auth::user()->name }}
         </div>   
     </div>
+
+    @if (session('msg'))
+        <div class="w-full mb-4 rounded text-center p-2 md:p-4 text-xl bg-gray-700 text-white">
+            {{ session('msg') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="w-full mb-4 rounded text-center p-2 md:p-4 text-xl bg-gray-700 text-white">
+                {{ $error }}
+            </div>
+        @endforeach
+    @endif
+
     <div class="bg-blue-200 w-full p-2 md:p-4 md:rounded md:container">
         
         <div class="flex  w-full pb-4">
@@ -22,18 +36,18 @@
                 <div class="">
                     <div class="flex flex-wrap pt-4 lg:pt-8 px-2 md:px-4 lg:px-8 bg-blue-300 rounded">
                         <div class="w-full flex justify-center items-center lg:w-2/5 ">
-                            <a href="/ad/{{ $ad->id }}" class="border-solid border-blue-400 border-4 mb-8 lg:h-auto lg:w-11/12">
-                                <img src="/assets/images/ads/{{ $images[0] }}" class="h-auto w-full hover:opacity-80 ">
+                            <a href="/ad/edit/{{ $ad->id }}" class="border-solid border-blue-400 border-4 mb-8 lg:h-auto bg-slate-800">
+                                <img src="/assets/images/ads/{{ $images[0] }}" class="h-48 sm:h-60 md:h-72 w-full hover:opacity-80 object-contain">
                             </a>
                             </div>
                             <div class="w-full px-2 lg:w-3/5">
                                 <h3 class="text-2xl text-center font-medium m-3 xl:text-3xl">
-                                <a href="/ad/{{ $ad->id }}" class="hover:text-gray-800 hover:underline">
+                                <a href="/ad/edit/{{ $ad->id }}" class="hover:text-gray-800 hover:underline">
                                     {{ $ad->title }}
                                 </a>
                             </h3>
                             <p class="text-xl">
-                                <a href="/ad/{{ $ad->id }}" class="hover:text-gray-800 text-md md:text-lg text-center lg:text-xl hover:underline">{{ substr($ad->description, 0, 150) }}[...]</a>
+                                <a href="/ad/edit/{{ $ad->id }}" class="hover:text-gray-800 text-md md:text-lg text-center lg:text-xl hover:underline">{{ substr($ad->description, 0, 150) }}[...]</a>
                             </p>
                             <p class="text-center m-6">
                                 <a href="/ad/edit/{{ $ad->id }}" class="bg-green-600 m-2 px-6 py-2 text-xl rounded text-white hover:bg-green-500 hover:text-gray-900">{{ __("Edit") }} </a>

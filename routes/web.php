@@ -21,7 +21,11 @@ Route::get('/register', [HomeController::Class, 'register'])->middleware('guest'
 Route::get('/dashboard', [HomeController::Class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::get('/user/profile', [HomeController::Class, 'account'])->middleware('auth');
 Route::get('/ad/create', [HomeController::Class, 'create'])->middleware('auth');
-Route::POST('/ad', [HomeController::class, 'create'])->middleware('auth');
+Route::get('/ad/edit/{id}', [HomeController::class, 'edit'])->middleware('auth');
+Route::PUT('/ad', [HomeController::class, 'newAd'])->middleware('auth');
+Route::PATCH('/ad/{id}', [HomeController::class, 'updateAd'])->middleware('auth');
+Route::get('/ad/delete/{id}', [HomeController::class, 'deleteAd'])->middleware('auth');
+
 
 // Route::get('/forgot-password', [HomeController::Class, 'password_request']);
 

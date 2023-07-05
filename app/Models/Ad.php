@@ -13,6 +13,7 @@ class Ad extends Model
 
     protected $fillable = [
         'user',
+        'slug',
         'title',
         'description',
         'site',
