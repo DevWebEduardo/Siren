@@ -13,6 +13,6 @@ class PriceTimeType extends Model
 
     public function ad()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->hasMany(Ad::class);
     }
 }

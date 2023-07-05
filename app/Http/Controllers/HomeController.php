@@ -19,11 +19,20 @@ class HomeController extends Controller
         $pri_type = PriceTimeType::All();
         $pro_type = ProType::All();
         $locations = Location::All();
+        $ads = Ad::join('locations', 'ads.location', '=', 'locations.id')
+        ->join('pri_types', 'ads.pri_type', '=', 'pri_types.id')
+        ->join('pro_types', 'ads.pro_type', '=', 'pro_types.id')
+        ->join('ad_types', 'ads.ad_type', '=', 'ad_types.id')
+        ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name')
+        ->where('ads.active', '0')
+        ->paginate(10);
+
         $context = [
             'adtype'=> $ad_type,
             'pritype'=> $pri_type,
             'protype'=> $pro_type,
             'locations'=> $locations,
+            'ads'=> $ads,
         ];
         return view('home', $context);
     }
@@ -40,7 +49,7 @@ class HomeController extends Controller
     {
         $ads = Ad::where('user', auth()->user()->id)
         ->orderBy('id', 'desc')
-        ->get();
+        ->paginate(8);
         $context = [
             'ads' => $ads,
         ];
@@ -124,7 +133,7 @@ class HomeController extends Controller
                 'locations'=> $locations,
                 'method'=> "PATCH",
                 'ad'=> $ad,
-                'id'=> $id,
+                'id'=> "/" . $id,
             ];
             return view('create', $context);
         }

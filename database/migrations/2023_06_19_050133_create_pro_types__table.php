@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pro_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 40)->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->timestamps();
         });
     }

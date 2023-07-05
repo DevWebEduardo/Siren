@@ -9,8 +9,10 @@ class Location extends Model
 {
     use HasFactory;
 
-    public function ad()
+    protected $table = 'locations';
+
+    public function location()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->hasMany(Ad::class);
     }
 }

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user');
             $table->string('slug');
-            $table->string('title');
-            $table->text('description');
+            $table->string('title')->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
+            $table->text('description')->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->string('site');
             $table->string('tel');
             $table->string('email');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreignId('pri_type'); //Price Time Type
             $table->decimal('price', 10, 2);
             $table->json('images');        // Max 6 Images
+            $table->tinyInteger('active')->default(0);
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->timestamps();

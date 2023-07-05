@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function ad()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->hasMany(Ad::class);
     }
 }

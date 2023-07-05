@@ -15,7 +15,7 @@
     @endif
     <div class="w-full mx-auto bg-blue-300 p-2 md:rounded md:container md:p-4">
         <div>
-            <form action="/ad{{ '/' . ($id ?? '') }}" method="POST" enctype="multipart/form-data" class="w-full justify-center items-center text-center">
+            <form action="/ad{{ ($id ?? '') }}" method="POST" enctype="multipart/form-data" class="w-full justify-center items-center text-center">
                 @csrf
                 @method($method)
                 <div class="mb-6">

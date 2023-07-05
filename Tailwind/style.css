@@ -67,4 +67,7 @@
         background-size:cover;
     }
     
+    .min-h-40{
+        min-height: 400px;
+    }
 }

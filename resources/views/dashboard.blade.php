@@ -21,7 +21,7 @@
         @endforeach
     @endif
 
-    <div class="bg-blue-200 w-full p-2 md:p-4 md:rounded md:container">
+    <div class="bg-blue-200 w-full p-2 md:p-4 md:rounded md:container min-h-40">
         
         <div class="flex  w-full pb-4">
             <a href="/ad/create" class="mx-auto">
@@ -29,10 +29,10 @@
             </a>
         </div>
         @foreach($ads as $ad)
-        @php
-            $images = json_decode($ad->images);
-        @endphp
         <!-- Card Start -->
+            @php
+                $images = json_decode($ad->images);
+            @endphp
                 <div class="">
                     <div class="flex flex-wrap pt-4 lg:pt-8 px-2 md:px-4 lg:px-8 bg-blue-300 rounded">
                         <div class="w-full flex justify-center items-center lg:w-2/5 ">
@@ -61,11 +61,14 @@
                 </div>
         <!-- Card End -->        
         @endforeach
-        <p class="text-center flex flex-wrap pt-4 justify-center">
-            <a href="" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">&lt;</a>
-            <a href="" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">1</a>
-            <a href="" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">2</a>
-            <a href="" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">&gt;</a>
-        </p>
+        @if(!count($ads) == 0)
+            <p class="text-center flex flex-wrap pt-4 justify-center">
+                <a href="{{ $ads->previousPageUrl() }}" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">&lt;</a>
+                @foreach ($ads->getUrlRange(1, $ads->lastPage()) as $page => $url)
+                    <a href="{{ $url }}" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">{{ $page }}</a>
+                @endforeach
+                <a href="{{ $ads->nextPageUrl() }}" class="text-2xl m-1 rounded bg-blue-300 text-gray-800 py-2 px-4 xl:text-3xl hover:bg-blue-400 duration-700">&gt;</a>
+            </p>
+        @endif
     </div>
 @endsection

@@ -33,8 +33,9 @@ class Ad extends Model
         return $this->belongsTo(User::class);        
     }
 
-    public function location() {
-        return $this->belongsTo(Location::class);
+    public function location()
+    {
+        return $this->belongsTo(Location::class, 'location');
     }
     
     public function ad_type() {

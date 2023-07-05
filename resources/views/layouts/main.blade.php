@@ -84,10 +84,10 @@
                     <div class="w-full sm:w-4/12 md:w-3/12 lg:w-full mx-2 pr-4 md:pr-0 lg:mx-0">
                         <p class="w-full text-lg md:text-xl pb-2 pt-6 md:pb-4 md:pt-8">{{ __("Order by") }}</p>
                         <select name="" class="w-full text-lg md:text-xl p-2 bg-blue-400 text-center">
-                            <option value="newest">{{ __("Newest") }}</option>
-                            <option value="oldest">{{ __("Oldest") }}</option>
-                            <option value="lowest_price">{{ __("Lowest price") }}</option>
-                            <option value="highest_price">{{ __("Highest price") }}</option>
+                            <option value="newest">Newest - 最新</option>
+                            <option value="oldest">Oldest - 最古</option>
+                            <option value="lowest_price">Lowest price - 最低価格</option>
+                            <option value="highest_price">Highest price - 最高価格</option>
                         </select>
                     </div>
                     <div class="w-full flex justify-center items-center lg:block lg:w-auto mb-7 md:mb-6 lg:mb-2 mt-5 ">
