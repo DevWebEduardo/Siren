@@ -12,29 +12,123 @@ use App\Models\AdType;
 
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+
+
 class HomeController extends Controller
 {
-    public function home(){
+
+    public function language(Request $request)
+    {   
+        if($request->language != 'en' && $request->language != 'jp'){
+            Session::put('locale', 'en');
+        }else{
+            Session::put('locale', $request->language);
+        }
+        app()->setLocale(Session::get('locale'));
+        return redirect()->back();
+    }
+
+    public function home(Request $request)
+    {
         $ad_type = AdType::All();
         $pri_type = PriceTimeType::All();
         $pro_type = ProType::All();
         $locations = Location::All();
-        $ads = Ad::join('locations', 'ads.location', '=', 'locations.id')
+
+        $orderOptions = [
+            'newest' => ['column' => 'created_at', 'order' => 'ASC'],
+            'oldest' => ['column' => 'created_at', 'order' => 'DESC'],
+            'lowest_price' => ['column' => 'price', 'order' => 'ASC'],
+            'highest_price' => ['column' => 'price', 'order' => 'DESC'],
+        ];
+        
+        if (array_key_exists($request->order, $orderOptions)) {
+            $column = $orderOptions[$request->order]['column'];
+            $order = $orderOptions[$request->order]['order'];
+        } else {
+            // Default column and order if $request->order is not valid
+            $column = 'created_at';
+            $order = 'DESC';
+        }
+
+        if($request->search){
+            $ads = Ad::join('locations', 'ads.location', '=', 'locations.id')
+            ->join('pri_types', 'ads.pri_type', '=', 'pri_types.id')
+            ->join('pro_types', 'ads.pro_type', '=', 'pro_types.id')
+            ->join('ad_types', 'ads.ad_type', '=', 'ad_types.id')
+            ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name')
+            ->where('ads.active', '0')
+            ->where(function ($query) use ($request) {
+                $query->where('title', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('description', 'LIKE', '%' . $request->search . '%');
+            })
+            ->orderBy($column, $order)
+            ->paginate(10);
+            $context = [
+                'adtype'=> $ad_type,
+                'pritype'=> $pri_type,
+                'protype'=> $pro_type,
+                'locations'=> $locations,
+                'ads'=> $ads,
+                'text'=> $request->search,
+            ];
+        }elseif($request->filter){
+            $ads = Ad::join('locations', 'ads.location', '=', 'locations.id')
+            ->join('pri_types', 'ads.pri_type', '=', 'pri_types.id')
+            ->join('pro_types', 'ads.pro_type', '=', 'pro_types.id')
+            ->join('ad_types', 'ads.ad_type', '=', 'ad_types.id')
+            ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name', 'pro_types.name as pro_type_name')
+            ->where('ads.active', '0')
+            ->where('pro_type', $request->pro)
+            ->where('location', $request->location)
+            ->where('ad_type', $request->type)
+            ->orderBy($column, $order)
+            ->paginate(10);
+            $context = [
+                'adtype'=> $ad_type,
+                'pritype'=> $pri_type,
+                'protype'=> $pro_type,
+                'locations'=> $locations,
+                'ads'=> $ads,
+                'pro'=> $request->pro,
+                'location'=> $request->location,
+                'ad_type'=> $request->type,
+                'order'=> $request->order,
+            ];
+        }else{
+            $ads = Ad::join('locations', 'ads.location', '=', 'locations.id')
+            ->join('pri_types', 'ads.pri_type', '=', 'pri_types.id')
+            ->join('pro_types', 'ads.pro_type', '=', 'pro_types.id')
+            ->join('ad_types', 'ads.ad_type', '=', 'ad_types.id')
+            ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name')
+            ->where('ads.active', '0')
+            ->orderBy($column, $order)
+            ->paginate(10);
+            $context = [
+                'adtype'=> $ad_type,
+                'pritype'=> $pri_type,
+                'protype'=> $pro_type,
+                'locations'=> $locations,
+                'ads'=> $ads,
+            ];
+        }
+        return view('home', $context);
+    }
+
+    public function ad($slug){
+        $ad = Ad::join('locations', 'ads.location', '=', 'locations.id')
         ->join('pri_types', 'ads.pri_type', '=', 'pri_types.id')
         ->join('pro_types', 'ads.pro_type', '=', 'pro_types.id')
         ->join('ad_types', 'ads.ad_type', '=', 'ad_types.id')
-        ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name')
-        ->where('ads.active', '0')
-        ->paginate(10);
-
+        ->select('ads.*', 'locations.name as location_name', 'pri_types.name as pri_type_name', 'pro_types.name as pro_type_name', 'ad_types.name as ad_type_name', 'pro_types.name as pro_type_name')
+        ->where('slug', $slug)
+        ->first();
         $context = [
-            'adtype'=> $ad_type,
-            'pritype'=> $pri_type,
-            'protype'=> $pro_type,
-            'locations'=> $locations,
-            'ads'=> $ads,
+            'ad'=>$ad,
         ];
-        return view('home', $context);
+        return view('ad', $context);
     }
 
     public function login(){
@@ -117,7 +211,8 @@ class HomeController extends Controller
         return redirect('/dashboard')->with('msg','Saved');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $ad = Ad::where('id', $id)->where('user', auth()->user()->id)->first();
         if(!$ad){
             return redirect('/dashboard')->with('msg', "Not Found");
@@ -139,7 +234,8 @@ class HomeController extends Controller
         }
     }
 
-    public function updateAd($id, Request $request){
+    public function updateAd($id, Request $request)
+    {
         $validatedData = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
@@ -201,7 +297,8 @@ class HomeController extends Controller
         }
     }
 
-    public function deleteAd($id){
+    public function deleteAd($id)
+    {
         $ad = Ad::where('id', $id)->where('user', auth()->user()->id)->first();
         if(!$ad){
             return redirect('/dashboard')->with('msg', "Not Found");

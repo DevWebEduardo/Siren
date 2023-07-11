@@ -13,10 +13,10 @@
                 <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="new-password" class="p-2 my-2 h-10 rounded text-black">
                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"  class="p-2 my-2 h-10 rounded text-black">
+                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="p-2 my-2 h-10 rounded text-black">
                 <p class="text-center mx-auto mt-2">
                     <input type="checkbox" name="terms" id="terms" required class="w-5 h-5 mx-2">
-                    {{ __('I accept the') }}&nbsp;<a href="/terms" class="underline">{{ __('Terms of Service') }}</a>&nbsp;{{ __('and the') }}&nbsp;<a href="/data-policy" class="underline">{{ __('Data Policy.') }}</a>
+                    {{ __('I accept the') }}&nbsp;<a href="/terms" class="underline">{{ __('Terms of Service') }}</a>&nbsp;{{ __('and the') }}&nbsp;<a href="/data-policy" class="underline">{{ __('Privacy Policy') }}.</a>
                 </p>
                 <button class="mt-7 mx-auto w-5/6 sm:w-3/6 md:w-2/6 bg-blue-400 py-3 sm:py-4 rounded hover:bg-blue-500 duration-700 font-medium">{{  __('Register') }}</button>
                 @if ($errors->any())
@@ -32,7 +32,7 @@
             </form>
             <nav class="mx-auto md:pr-4 w-8/12 pb-8 flex justify-center md:justify-end items-center">
                 <a href="/">
-                    <button class="px-8 py-1 md:py-2 text-lg md:text-xl bg-blue-400 rounded text-gray-700 font-medium hover:bg-blue-500 duration-700 rounded-t-none">Home</button>
+                    <button class="px-8 py-1 md:py-2 text-lg md:text-xl bg-blue-400 rounded text-gray-700 font-medium hover:bg-blue-500 duration-700 rounded-t-none">{{ __('Home') }}</button>
                 </a>
             </nav>
             

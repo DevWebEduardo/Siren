@@ -23,9 +23,9 @@
                     <input type="text" id="title" name="title" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ __('Title') }}" value="{{ $ad->title ?? '' }}" required>
                 </div> 
                 <div class="mb-6">
-                    <label for="description" class="block mb-2 text-xl font-medium text-gray-900 ">{{ __("Description") }}</label>
-                    <textarea id="description" name="description" class="border-2 border-blue-400 h-48 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ __('Description') }}" required>{{ $ad->description ?? '' }}</textarea>
-                </div> 
+                    <label for="description" class="block mb-2 text-xl font-medium text-gray-900">{{ __("Description") }}</label>
+                    <textarea id="description" name="description" class="border-2 border-blue-400 h-48 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ __('Description') }}" required>{{$ad->description ?? ''}}</textarea>
+                </div>
                 <div class="grid gap-6 mb-6 md:grid-cols-2 mt-6">
                     <div>
                         <label for="bedrooms" class="block mb-2 text-xl font-medium text-gray-900">{{ __("Number of Bedrooms") }}</label>
@@ -57,7 +57,7 @@
 
 
                 <div class="flex gap-6 mt-4 mb-6 justify-center items-center" id="imagesReady">
-
+ 
                 </div>
 
 
@@ -92,36 +92,44 @@
 
                     <div>
                         <label for="pri_type" class="block mb-2 text-xl font-medium text-gray-900 ">{{ __("Price Time Type") }}</label>
-                        <select name="pri_type" id="pri_type" name="pri_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $ad->pri_type ?? '' }}" required>
+                        <select name="pri_type" id="pri_type" name="pri_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             @foreach ($pritype as $option)
-                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                <option value="{{ $option->id }}" {{ isset($ad->pri_type) && $ad->pri_type == $option->id ? 'selected' : '' }}>
+                                    {{ $option->name }}
+                                </option>
                             @endforeach  
                         </select>
                     </div>
 
                     <div>
                         <label for="location" class="block mb-2 text-xl font-medium text-gray-900 ">{{ __("Location") }}</label>
-                        <select name="location" id="location" name="location" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $ad->location ?? '' }}" required>
+                        <select name="location" id="location" name="location" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             @foreach ($locations as $option)
-                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                <option value="{{ $option->id }}" {{ isset($ad->location) && $ad->location == $option->id ? 'selected' : '' }}>
+                                        {{ $option->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div>
                         <label for="ad_type" class="block mb-2 text-xl font-medium text-gray-900 ">{{ __("Ad Type") }}</label>
-                        <select name="ad_type" id="ad_type" name="ad_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $ad->ad_type ?? '' }}" required>
+                        <select name="ad_type" id="ad_type" name="ad_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             @foreach ($adtype as $option)
-                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                <option value="{{ $option->id }}" {{ isset($ad->ad_type) && $ad->ad_type == $option->id ? 'selected' : '' }}>
+                                        {{ $option->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div>
                         <label for="pro_type" class="block mb-2 text-xl font-medium text-gray-900 ">{{ __("Property Type") }}</label>
-                        <select name="pro_type" id="pro_type" name="pro_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ $ad->pro_type ?? '' }}" required>
+                        <select name="pro_type" id="pro_type" name="pro_type" class="border-2 border-blue-400 border-gray-700 bg-blue-50 border border-gray-300 text-gray-900 text-xl rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                             @foreach ($protype as $option)
-                                <option value="{{ $option->id }}">{{ $option->name }}</option>
+                                <option value="{{ $option->id }}" {{ isset($ad->pro_type) && $ad->pro_type == $option->id ? 'selected' : '' }}>
+                                        {{ $option->name }}
+                                </option>
                             @endforeach  
                         </select>
                     </div>

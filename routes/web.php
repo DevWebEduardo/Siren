@@ -22,10 +22,11 @@ Route::get('/dashboard', [HomeController::Class, 'dashboard'])->middleware('auth
 Route::get('/user/profile', [HomeController::Class, 'account'])->middleware('auth');
 Route::get('/ad/create', [HomeController::Class, 'create'])->middleware('auth');
 Route::get('/ad/edit/{id}', [HomeController::class, 'edit'])->middleware('auth');
+Route::get('/ad/{slug}', [HomeController::class, 'ad']);
 Route::PUT('/ad', [HomeController::class, 'newAd'])->middleware('auth');
 Route::PATCH('/ad/{id}', [HomeController::class, 'updateAd'])->middleware('auth');
 Route::get('/ad/delete/{id}', [HomeController::class, 'deleteAd'])->middleware('auth');
-
+Route::POST('/lg', [HomeController::class, 'language'])->middleware('auth');
 
 // Route::get('/forgot-password', [HomeController::Class, 'password_request']);
 

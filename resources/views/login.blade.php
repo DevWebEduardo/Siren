@@ -18,7 +18,7 @@
                     <a href="/register" class="underline">{{ __('Register') }}</a><br>
                     <a href="/forgot-password" class="underline">{{ __('Forgot your password?') }}</a>
                 </p>
-                <button class="mt-4 mx-auto w-5/6 sm:w-3/6 md:w-2/6 bg-blue-400 py-3 sm:py-4 rounded hover:bg-blue-500 duration-700 font-medium">Login</button>
+                <button class="mt-4 mx-auto w-5/6 sm:w-3/6 md:w-2/6 bg-blue-400 py-3 sm:py-4 rounded hover:bg-blue-500 duration-700 font-medium">{{ __('Login') }}</button>
                 @if ($errors->any())
                     <div>
                         <div>{{ __('Whoops! Something went wrong.') }}</div>
@@ -35,7 +35,7 @@
             </form>
             <nav class="mx-auto md:pr-4 w-8/12 pb-8 flex justify-center md:justify-end items-center">
                 <a href="/">
-                    <button class="px-8 py-1 md:py-2 text-lg md:text-xl bg-blue-400 rounded text-gray-700 font-medium hover:bg-blue-500 duration-700 rounded-t-none">Home</button>
+                    <button class="px-8 py-1 md:py-2 text-lg md:text-xl bg-blue-400 rounded text-gray-700 font-medium hover:bg-blue-500 duration-700 rounded-t-none">{{ __('Home') }}</button>
                 </a>
             </nav>
 @endsection
