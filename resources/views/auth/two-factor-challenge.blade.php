@@ -1,11 +1,13 @@
-
+@extends('layouts.login')
+@section('title', 'Confirm Password')
+@section('content')
     <x-authentication-card>
         <div x-data="{ recovery: false }">
-            <div class="mb-4 text-sm text-gray-600" x-show="! recovery">
+            <div class="mb-4 text-lg sm:text-xl text-slate-800" x-show="! recovery">
                 {{ __('Please confirm access to your account by entering the authentication code provided by your authenticator application.') }}
             </div>
 
-            <div class="mb-4 text-sm text-gray-600" x-cloak x-show="recovery">
+            <div class="mb-4 text-lg sm:text-xl text-slate-800" x-cloak x-show="recovery">
                 {{ __('Please confirm access to your account by entering one of your emergency recovery codes.') }}
             </div>
 
@@ -23,8 +25,8 @@
                     <x-input id="recovery_code" class="block mt-1 w-full" type="text" name="recovery_code" x-ref="recovery_code" autocomplete="one-time-code" />
                 </div>
 
-                <div class="flex items-center justify-end mt-4">
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                <div class="flex flex-col items-center justify-end mt-4">
+                    <button type="submit" class="text-lg mb-1 text-gray-600 hover:text-gray-900 underline cursor-pointer"
                                     x-show="! recovery"
                                     x-on:click="
                                         recovery = true;
@@ -33,7 +35,7 @@
                         {{ __('Use a recovery code') }}
                     </button>
 
-                    <button type="button" class="text-sm text-gray-600 hover:text-gray-900 underline cursor-pointer"
+                    <button type="submit" class="text-lg mb-2 text-gray-600 hover:text-gray-900 underline cursor-pointer"
                                     x-cloak
                                     x-show="recovery"
                                     x-on:click="
@@ -43,10 +45,11 @@
                         {{ __('Use an authentication code') }}
                     </button>
 
-                    <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                    <button type="submit" class="bg-green-600 text-white font-medium text-center px-10 md:px-14 py-1 md:py-2 text-lg md:text-xl rounded hover:bg-green-500 hover:text-black duration-700">
                         {{ __('Login') }}
                     </button>
                 </div>
             </form>
         </div>
     </x-authentication-card>
+@endsection

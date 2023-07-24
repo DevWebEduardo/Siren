@@ -52,12 +52,12 @@
                 <div class="w-full md:w-3/12 flex justify-center items-center text-center md:min-w-[300px] my-1 md:my-4 md:my-auto">
                     <ul>
                         <li class="my-2">
-                            <a href="" class="hover:underline">
+                            <a href="/terms" class="hover:underline">
                                 {{ __("Terms of use") }}
                             </a>
                         </li>
                         <li class="my-2">
-                            <a href="" class="hover:underline">
+                            <a href="/privacy-policy" class="hover:underline">
                                 {{ __("Privacy Policy") }}
                             </a>
                         </li>

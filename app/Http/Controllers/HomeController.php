@@ -307,4 +307,14 @@ class HomeController extends Controller
         return redirect('/dashboard')->with('msg', "Ad removed");
     }
     
+    public function getTerms()
+    {
+        return view('terms');
+    }
+
+    public function getPolicy()
+    {
+        return view('policy');
+    }
+
 }

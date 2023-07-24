@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title')</title>
         <link rel="icon" type="image/png" href="/assets/images/logo.png">
-        <link href="assets/css/style.tailwind.css" rel="stylesheet">
+        <link href="/assets/css/style.tailwind.css" rel="stylesheet">
     </head>
     <body class="bg-blue-100">
 

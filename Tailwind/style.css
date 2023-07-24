@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer {
+    body { 
+        background-image: url('../images/background.png');
+        background-repeat: repeat;
+    }
 
     .head-h {
         height: 350px;
