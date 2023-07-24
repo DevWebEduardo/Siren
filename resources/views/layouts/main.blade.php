@@ -17,6 +17,7 @@
                 @include('components.ad')
             @endif
         </main>
+        @include('components.popup-policies')
         @include('components.footer')
         <script>
             var btn = document.querySelector('i[id=mb-button]'); 

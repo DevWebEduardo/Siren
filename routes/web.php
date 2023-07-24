@@ -26,7 +26,7 @@ Route::get('/ad/{slug}', [HomeController::class, 'ad']);
 Route::PUT('/ad', [HomeController::class, 'newAd'])->middleware('auth');
 Route::PATCH('/ad/{id}', [HomeController::class, 'updateAd'])->middleware('auth');
 Route::get('/ad/delete/{id}', [HomeController::class, 'deleteAd'])->middleware('auth');
-Route::POST('/lg', [HomeController::class, 'language'])->middleware('auth');    
+Route::POST('/lg', [HomeController::class, 'language']);    
 Route::get('/privacy-policy', [HomeController::class, 'getPolicy']);    
 Route::get('/terms', [HomeController::class, 'getTerms']);    
 

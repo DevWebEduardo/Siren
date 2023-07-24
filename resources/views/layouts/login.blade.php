@@ -12,6 +12,6 @@
     <main class="w-full md:container mx-auto">
         @yield('content');
     </main>
-
+    @include('components.popup-policies')
     </body>
 </html>

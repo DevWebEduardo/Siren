@@ -14,11 +14,10 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-
     public function language(Request $request)
     {   
         if($request->language != 'en' && $request->language != 'jp'){
@@ -154,12 +153,19 @@ class HomeController extends Controller
         return view('account');
     }
 
-    public function password_request(){
-        
-    }
-
     public function create()
     {
+        if(empty($user->two_factor_secret)){
+            return redirect('dashboard')->with('msg', __('You need to activate the two factor authentication to post new ads.'));
+        }
+        $currentTime = Carbon::now();
+        $oneHourAgo = $currentTime->copy()->subHour();
+        $adCount = Ad::where('user', auth()->user()->id)
+            ->where('created_at', '>=', $oneHourAgo)
+            ->count();
+        if($adCount > 5){
+            return redirect('dashboard')->with('msg', __('You need to await a litle to create more Ads.'));
+        }
         $ad_type = AdType::All();
         $pri_type = PriceTimeType::All();
         $pro_type = ProType::All();
@@ -176,6 +182,17 @@ class HomeController extends Controller
 
     public function newAd(Request $request)
     {
+        if(empty($user->two_factor_secret)){
+            return redirect('dashboard')->with('msg', __('You need to activate the two factor authentication to post new ads.'));
+        }
+        $currentTime = Carbon::now();
+        $oneHourAgo = $currentTime->copy()->subHour();
+        $adCount = Ad::where('user', auth()->user()->id)
+            ->where('created_at', '>=', $oneHourAgo)
+            ->count();
+        if($adCount > 5){
+            return redirect('dashboard')->with('msg', __('You need to await a litle to create more Ads.'));
+        }
         $validatedData = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
@@ -208,14 +225,25 @@ class HomeController extends Controller
         $ad->images = json_encode($stored_images);
         $ad->user= auth()->user()->id;
         $ad->save();
-        return redirect('/dashboard')->with('msg','Saved');
+        return redirect('/dashboard')->with('msg', __('Saved'));
     }
 
     public function edit($id)
     {
+        if(empty($user->two_factor_secret)){
+            return redirect('dashboard')->with('msg', __('You need to activate the two factor authentication to post new ads.'));
+        }
+        $currentTime = Carbon::now();
+        $oneHourAgo = $currentTime->copy()->subHour();
+        $adCount = Ad::where('user', auth()->user()->id)
+            ->where('created_at', '>=', $oneHourAgo)
+            ->count();
+        if($adCount > 5){
+            return redirect('dashboard')->with('msg', __('You need to await a litle to create more Ads.'));
+        }
         $ad = Ad::where('id', $id)->where('user', auth()->user()->id)->first();
         if(!$ad){
-            return redirect('/dashboard')->with('msg', "Not Found");
+            return redirect('/dashboard')->with('msg', __("Not Found"));
         }else{
             $ad_type = AdType::All();
             $pri_type = PriceTimeType::All();
@@ -236,6 +264,17 @@ class HomeController extends Controller
 
     public function updateAd($id, Request $request)
     {
+        if(empty($user->two_factor_secret)){
+            return redirect('dashboard')->with('msg', __('You need to activate the two factor authentication to post new ads.'));
+        }
+        $currentTime = Carbon::now();
+        $oneHourAgo = $currentTime->copy()->subHour();
+        $adCount = Ad::where('user', auth()->user()->id)
+            ->where('created_at', '>=', $oneHourAgo)
+            ->count();
+        if($adCount > 5){
+            return redirect('dashboard')->with('msg', __(__('You need to await a litle to create more Ads.')));
+        }
         $validatedData = $request->validate([
             'title' => 'required|string|max:50',
             'description' => 'required|string',
@@ -293,7 +332,7 @@ class HomeController extends Controller
                     }
                 }
             }
-            return redirect('/dashboard')->with('msg','Updated');
+            return redirect('/dashboard')->with('msg', __('Updated'));
         }
     }
 
@@ -301,10 +340,17 @@ class HomeController extends Controller
     {
         $ad = Ad::where('id', $id)->where('user', auth()->user()->id)->first();
         if(!$ad){
-            return redirect('/dashboard')->with('msg', "Not Found");
+            return redirect('/dashboard')->with('msg', __("Not Found"));
+        }
+        $images = json_decode($ad->images);
+        foreach($images as $image){
+            $imagePath = public_path('assets/images/ads/' . $image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
         $ad->delete();
-        return redirect('/dashboard')->with('msg', "Ad removed");
+        return redirect('/dashboard')->with('msg', __("Ad removed"));
     }
     
     public function getTerms()

@@ -63,5 +63,19 @@
     "Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "続行する前に、私たちがちょうどあなたにメールしたリンクをクリックしてメールアドレスを確認していただけますか？メールを受信していない場合は、喜んで別のメールを送信します。",
     "A new verification link has been sent to the email address you provided in your profile settings.": "プロフィール設定で指定したメールアドレスに、新しい確認リンクが送信されました。",
     "Resend Verification Email": "確認メールを再送信する",
-    "Edit Profile": "プロフィールを編集する"
+    "Edit Profile": "プロフィールを編集する",
+    "You need to activate the two factor authentication to post new ads.": "新しい広告を投稿するには、二段階認証を有効にする必要があります。",
+    "You need to await a litle to create more Ads.": "もう少し待ってから広告を作成してください。",
+    "From 1 to 6 images allowed": "1枚から6枚の画像が許可されています。",
+    "Saved": "保存しました",
+    "Not Found": "見つかりません",
+    "Updated": "更新しました",
+    "Ad removed": "広告を削除しました",
+    "Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "続行する前に、送信したリンクをクリックしてメールアドレスを確認してください。メールが届かなかった場合は、再送信します。",
+    "Please consent to our policies and terms": "当サイトのポリシーや利用規約に同意してください。",
+    "Please be informed that this site utilizes cookies to enhance your interaction and may collect data related to your activities here.": "当サイトは、あなたのインタラクションを向上させるためにCookieを使用し、ここでのアクティビティに関連するデータを収集することがあります。",        "To learn more about our policies and privacy practices, feel free to read": "当サイトのポリシーやプライバシーに関する詳細を知りたい場合は、以下のリンクを読んでください。",
+    "Terms of Use": "利用規約",
+    "Privacy Policy": "プライバシーポリシー",
+    "Your privacy is important, and we are committed to being transparent about how we handle your information.": "あなたのプライバシーは重要であり、私たちは情報の取り扱いについて透明性を持つことを約束します。",
+    "I Consent": "同意する"
 }
