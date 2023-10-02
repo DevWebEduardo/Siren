@@ -1,4 +1,4 @@
-** Siren - Deprecated**
+**Siren - Deprecated**
 <br><br>
 Siren is a minimalist website designed to make it effortless for Okinawa residents to announce their houses, apartments, and more for sale or rent. With a simple and intuitive approach, Siren provides a user-friendly platform that streamlines the process of showcasing and finding properties within the region.
 <br><br>
